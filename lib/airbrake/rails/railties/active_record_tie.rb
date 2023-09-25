@@ -30,7 +30,8 @@ module Airbrake
           return unless defined?(::Rails)
           return if Gem::Version.new(::Rails.version) > Gem::Version.new('4.2')
 
-          ActiveRecord::Base.include(Airbrake::Rails::ActiveRecord)
+          # fix https://github.com/airbrake/airbrake/issues/1248
+          ::ActiveRecord::Base.include(Airbrake::Rails::ActiveRecord)
         end
 
         def tie_activerecord_apm
