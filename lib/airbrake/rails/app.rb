@@ -45,7 +45,7 @@ module Airbrake
             # Rails 7+ the AST for the route is not kept in memory anymore.
             #
             # See: https://github.com/rails/rails/pull/43006#discussion_r783895766
-            next if route.path.spec.any?(ActionDispatch::Journey::Nodes::Star)
+            next if route.respond_to?(:glob?) && route.glob?
 
             path =
               if engine == ::Rails.application
